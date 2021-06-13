@@ -1,23 +1,15 @@
 import "./App.css";
-// import Button from "@material-ui/core/Button";
-import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
-// import Typography from "@material-ui/core/Typography";
+
 import * as contentful from "contentful";
 import React, { useEffect, useState } from "react";
-import ReactDOM from "react-dom";
 
 import BlogPost from "./BlogPost";
 
 import Header from "./Header";
-const theme = createMuiTheme({
-  typography: {
-    fontFamily: ["Raleway", "sans-serif"].join(","),
-  },
-});
 
-const aValue = "i am a secret value";
-const aTemplateLiteral = `${aValue}`;
-// `${}`
+// const aValue = "i am a secret value";
+// const aTemplateLiteral = `${aValue}`;
+// // `${}`
 
 console.log(process.env.REACT_APP_CONTENTFUL_TOKEN);
 // spaceid
@@ -57,49 +49,18 @@ function App() {
     getEntriesAsync();
   }, []);
 
-  const monthToStr = (monthNum) => {
-    switch (monthNum) {
-      case 1:
-        return "January";
-      case 2:
-        return "February";
-      case 3:
-        return "March";
-      case 4:
-        return "April";
-      case 5:
-        return "May";
-      case 6:
-        return "June";
-      case 7:
-        return "July";
-      case 8:
-        return "August";
-      case 9:
-        return "September";
-      case 10:
-        return "October";
-      case 11:
-        return "November";
-      case 12:
-        return "December";
-    }
-  };
-
   return (
-    <ThemeProvider theme={theme}>
-      <div className="App">
-        <Header />
-        {/* NavBar */}
-        <div className="blogposts-container">
-          {blogPosts &&
-            blogPosts.map((post) => {
-              return <BlogPost post={post} />;
-            })}
-        </div>
-        {/* Footer */}
+    <div className="App">
+      <Header />
+      {/* NavBar */}
+      <div className="blogposts-container">
+        {blogPosts &&
+          blogPosts.map((post) => {
+            return <BlogPost post={post} />;
+          })}
       </div>
-    </ThemeProvider>
+      {/* Footer */}
+    </div>
   );
 }
 
