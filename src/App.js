@@ -2,8 +2,9 @@ import "./App.css";
 
 import * as contentful from "contentful";
 import React, { useEffect, useState } from "react";
-
-import BlogPost from "./BlogPost";
+import { Route, Switch } from "react-router-dom";
+import BlogPosts from "./BlogPosts";
+import { useParams } from "react-router-dom";
 
 import Header from "./Header";
 
@@ -49,18 +50,49 @@ function App() {
     getEntriesAsync();
   }, []);
 
+  // <Route path="/:tag">
+  //   <BlogPosts blogPosts={blogPosts} />
+  // </Route>;
+
+  if (blogPosts && true) {
+    return (
+      <>
+        <div className="App">
+          <Header />
+          {/* NavBar */}
+          <div className="blogposts-container">
+            <Switch>
+              <Route path="/:entry_id">
+                <BlogPosts blogPosts={blogPosts} />
+              </Route>
+              <Route path="/:tag">
+                <BlogPosts blogPosts={blogPosts} />
+              </Route>
+              <Route path="/">
+                <BlogPosts blogPosts={blogPosts} />
+              </Route>
+            </Switch>
+          </div>
+          {/* Footer */}
+        </div>
+      </>
+    );
+  }
+
   return (
-    <div className="App">
-      <Header />
-      {/* NavBar */}
-      <div className="blogposts-container">
-        {blogPosts &&
-          blogPosts.map((post) => {
-            return <BlogPost post={post} />;
-          })}
+    <>
+      <div className="App">
+        <Header />
+        {/* NavBar */}
+        <div className="blogposts-container">
+          <p>Oops! Couldn't receive blogpost data.</p>
+        </div>
+        {/* Footer */}
       </div>
-      {/* Footer */}
-    </div>
+      <Switch>
+        <Route path="/:entry_id"></Route>
+      </Switch>
+    </>
   );
 }
 

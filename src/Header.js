@@ -2,7 +2,8 @@ import React from "react";
 import headless_optimist2 from "./headless_optimist2.png";
 import { Navbar, Nav } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
-
+import { Route, Switch } from "react-router-dom";
+import BlogPosts from "./BlogPosts";
 export default function Header() {
   return (
     <div className="App-header">
@@ -51,26 +52,27 @@ export default function Header() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mx-auto">
             <NavLink to="/" className="navbarLink">
-              Home
+              home
             </NavLink>
-            <NavLink to="/Energy" className="navbarLink">
-              Energy
+            <NavLink to="/energy" className="navbarLink">
+              energy
             </NavLink>
-            <NavLink to="/Environment" className="navbarLink">
-              Environment
+            <NavLink to="/environment" className="navbarLink">
+              environment
             </NavLink>
-            <NavLink to="/Gender" className="navbarLink">
-              Gender
+            <NavLink to="/gender" className="navbarLink">
+              gender
             </NavLink>
-            <NavLink to="/Authors" className="navbarLink">
-              Authors
+            <NavLink to="/authors" className="navbarLink">
+              authors
             </NavLink>
             <NavLink to="/contact" className="navbarLink">
-              Contact
+              contact
             </NavLink>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
+     
     </div>
   );
 }
