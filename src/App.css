@@ -86,22 +86,31 @@ button.btn:hover, button.btn:focus{
 
 
 .blogpost-wrapper {
-  border: 1px solid red;
+  width: 66%;
+  margin: 10px 16.666%;
 }
 
 .blogpost-body {
-  border: 3px solid green;
+
 }
 
 .blogpost-info {
-  border: 1px solid blue;
+}
+
+.App-footer {
+  background-color: #6B76FF;
+  color: #F9F871;
+}
+
+.w-50 {
+  margin-bottom: 20px;
 }
 
 
 @media screen and (max-width: 1200px) {
 
   .headerForm {
-    position:fixed;
+    position:relative;
     padding-right: 4vw;
    
   }

@@ -1,17 +1,15 @@
 import React from "react";
 import headless_optimist2 from "./headless_optimist2.png";
 import { Navbar, Nav } from "react-bootstrap";
-import { NavLink, useParams } from "react-router-dom";
-import { Route } from "react-router-dom";
-import BlogPosts from "./BlogPosts";
-export default function Header({ blogPosts }) {
-  const { tag } = useParams();
+import { NavLink } from "react-router-dom";
+
+export default function Header() {
   return (
     <>
       <div className="App-header">
         <div className="container container-fluid titleWrapper ">
           <div className=" row ">
-            <div class=" col-auto text-end h-25">
+            <div className=" col-auto text-end h-25">
               <h1 className=" blogTitle  d-inline">The Headless</h1>{" "}
             </div>
 
@@ -25,14 +23,18 @@ export default function Header({ blogPosts }) {
             </div>
             <div className="container container-fluid h-25 w-25">
               <div className=" col ms-auto headerForm">
-                <form class="d-flex  ">
+                <form className="d-flex  ">
                   <input
-                    class="form-control me-2"
+                    className="form-control me-2 small"
                     type="search"
-                    placeholder="Search"
+                    placeholder="Find Title or Article"
                     aria-label="Search"
+                    name="searchField"
                   />
-                  <button class="btn btn-outline-success" type="submit">
+                  <button
+                    className="btn btn-outline-success small"
+                    type="submit"
+                  >
                     Search
                   </button>
                 </form>
@@ -56,13 +58,13 @@ export default function Header({ blogPosts }) {
               <NavLink to="/home" className="navbarLink">
                 home
               </NavLink>
-              <NavLink to="/energy" className="navbarLink">
+              <NavLink to="/category/energy" className="navbarLink">
                 energy
               </NavLink>
-              <NavLink to="/environment" className="navbarLink">
+              <NavLink to="/category/environment" className="navbarLink">
                 environment
               </NavLink>
-              <NavLink to="/gender" className="navbarLink">
+              <NavLink to="/category/gender" className="navbarLink">
                 gender
               </NavLink>
               <NavLink to="/authors" className="navbarLink">
