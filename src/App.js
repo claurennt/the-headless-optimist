@@ -21,11 +21,6 @@ const client = contentful.createClient({
   // This is the access token for this space. Normally you get both ID and the token in the Contentful web app
   accessToken: `${process.env.REACT_APP_CONTENTFUL_TOKEN}`,
 });
-// This API call will request an entry with the specified ID from the space defined at the top, using a space-specific access token.
-// client
-// .getEntry("6Juy1ErMKVXwyOKuYnfTOw")
-// .then((entry) => console.log(entry))
-// .catch((err) => console.log(err));
 
 function App() {
   const [blogPosts, setBlogPosts] = useState();
@@ -50,25 +45,18 @@ function App() {
     getEntriesAsync();
   }, []);
 
-  // <Route path="/:tag">
-  //   <BlogPosts blogPosts={blogPosts} />
-  // </Route>;
-
-  if (blogPosts && true) {
+  if (blogPosts) {
     return (
       <>
         <div className="App">
-          <Header />
-          {/* NavBar */}
+          <Header blogPosts={blogPosts} />
+
           <div className="blogposts-container">
             <Switch>
-              <Route path="/:entry_id">
+              <Route path="/:entry_id?/:tag?">
                 <BlogPosts blogPosts={blogPosts} />
               </Route>
-              <Route path="/:tag">
-                <BlogPosts blogPosts={blogPosts} />
-              </Route>
-              <Route path="/">
+              <Route path="/authors/:postAuthor?">
                 <BlogPosts blogPosts={blogPosts} />
               </Route>
             </Switch>
@@ -89,9 +77,6 @@ function App() {
         </div>
         {/* Footer */}
       </div>
-      <Switch>
-        <Route path="/:entry_id"></Route>
-      </Switch>
     </>
   );
 }

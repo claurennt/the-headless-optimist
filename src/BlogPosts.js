@@ -1,41 +1,37 @@
 import React from "react";
-import Markdown from "markdown-to-jsx";
-import moment from "moment";
-import { Link } from "react-router-dom";
-import { useParams, useLocation } from "react-router-dom";
+
+import { useParams } from "react-router-dom";
 import IndividualPost from "./IndividualPost";
 
-export default function BlogPosts({ blogPosts, sitePath }) {
-  const location = useLocation();
-  console.log(location);
-  console.log({ sitePath: sitePath });
-
+export default function BlogPosts({ blogPosts }) {
   const { entry_id } = useParams();
   const { tag } = useParams();
+  const { postAuthor } = useParams();
 
-  console.log({ tag: tag });
-
-  function tagsContainGivenTag(givenTags, oneTag) {
-    let tagsArray = [];
-    tagsArray = givenTags;
-    let foundTag = false;
-    for (const aTag in tagsArray) {
-      if (oneTag.toLowerCase() === aTag.sys.id.toLowerCase()) {
-        console.log("Found a fitting tag!");
-        foundTag = true;
-      }
-    }
-    return foundTag;
-  }
+  // function tagsContainGivenTag(givenTags, oneTag) {
+  //   let tagsArray = [];
+  //   tagsArray = givenTags;
+  //   let foundTag = false;
+  //   for (const aTag in tagsArray) {
+  //     if (oneTag.toLowerCase() === aTag.metadata[0].sys.id.toLowerCase()) {
+  //       console.log("Found a fitting tag!");
+  //       foundTag = true;
+  //     }
+  //   }
+  //   return foundTag;
+  // }[2].fields.postAuthor
 
   return blogPosts
-    .filter((post) =>
-      entry_id
-        ? entry_id === post.sys.id
-        : tag
-        ? tagsContainGivenTag(post.metadata.tags, tag)
-        : true
-    )
+    .filter((post) => {
+      if (entry_id) {
+        return entry_id === post.sys.id;
+      } else if (tag) {
+        return tag === post.metadata.tags[0].sys.id;
+      } else if (postAuthor) {
+        return postAuthor === post.fields.postAuthor;
+      }
+      return post;
+    })
     .map((post) => {
       return <IndividualPost post={post} detailed={entry_id ? true : false} />;
     });
