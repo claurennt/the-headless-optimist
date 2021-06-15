@@ -6,7 +6,7 @@ import IndividualPost from "./IndividualPost";
 export default function BlogPosts({ blogPosts }) {
   const { entry_id } = useParams();
   const { tag } = useParams();
-  const { postAuthor } = useParams();
+  const { author } = useParams();
 
   // function tagsContainGivenTag(givenTags, oneTag) {
   //   let tagsArray = [];
@@ -27,8 +27,8 @@ export default function BlogPosts({ blogPosts }) {
         return entry_id === post.sys.id;
       } else if (tag) {
         return tag === post.metadata.tags[0].sys.id;
-      } else if (postAuthor) {
-        return postAuthor === post.fields.postAuthor;
+      } else if (author) {
+        return author === post.fields.postAuthor;
       }
       return post;
     })

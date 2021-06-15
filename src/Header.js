@@ -53,7 +53,7 @@ export default function Header({ blogPosts }) {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mx-auto">
-              <NavLink to="/" className="navbarLink">
+              <NavLink to="/home" className="navbarLink">
                 home
               </NavLink>
               <NavLink to="/energy" className="navbarLink">
@@ -75,10 +75,6 @@ export default function Header({ blogPosts }) {
           </Navbar.Collapse>
         </Navbar>
       </div>
-
-      <Route path="/:tag">
-        <BlogPosts blogPosts={blogPosts} />
-      </Route>
     </>
   );
 }
