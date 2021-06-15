@@ -4,8 +4,6 @@ import { Link, useParams, useLocation } from "react-router-dom";
 import moment from "moment";
 
 export default function IndividualPost({ post, detailed }) {
-  const { author } = useParams();
-  const { tag } = useParams();
   // console.log("@@@@@@@post@@@@@@@");
   // console.log(post);
   // console.log({ detailed: detailed });
@@ -24,7 +22,7 @@ export default function IndividualPost({ post, detailed }) {
           {"published on "}
           <a>{moment(post.fields.publishingDate).format("MMM Do YYYY")}</a>
           {" by "}
-          <Link to={`authors/${post.fields.postAuthor}`}>
+          <Link to={`/${post.fields.postAuthor}`}>
             {post.fields.postAuthor}
           </Link>{" "}
           {" in "} <a className="blogpost-location">{"Neverland"}</a>

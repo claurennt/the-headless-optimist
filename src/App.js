@@ -1,11 +1,9 @@
 import "./App.css";
-
 import * as contentful from "contentful";
 import React, { useEffect, useState } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import BlogPosts from "./BlogPosts";
 import { useParams } from "react-router-dom";
-
 import Header from "./Header";
 
 // const aValue = "i am a secret value";
@@ -52,16 +50,24 @@ function App() {
           <Header blogPosts={blogPosts} />
 
           <div className="blogposts-container">
-            <Switch>
-              <Route path="/:entry_id?/:tag?">
+            <>
+              <Route exact path="/">
+                {<Redirect to="/home" />}
+              </Route>
+              <Route path="/:entry_id">
                 <BlogPosts blogPosts={blogPosts} />
               </Route>
-              <Route path="/authors/:postAuthor?">
+              <Route path="/:tag">
                 <BlogPosts blogPosts={blogPosts} />
               </Route>
-            </Switch>
+              <Route path="/:author">
+                <BlogPosts blogPosts={blogPosts} />
+              </Route>
+              <Route path="/home">
+                <BlogPosts blogPosts={blogPosts} />
+              </Route>
+            </>
           </div>
-          {/* Footer */}
         </div>
       </>
     );
