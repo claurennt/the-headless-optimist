@@ -67,11 +67,8 @@ export default function Header() {
               <NavLink to="/category/gender" className="navbarLink">
                 gender
               </NavLink>
-              <NavLink to="/authors" className="navbarLink">
+              <NavLink to="/Authors" className="navbarLink">
                 authors
-              </NavLink>
-              <NavLink to="/contact" className="navbarLink">
-                contact
               </NavLink>
             </Nav>
           </Navbar.Collapse>

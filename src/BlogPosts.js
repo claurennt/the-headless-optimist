@@ -12,10 +12,14 @@ export default function BlogPosts({ blogPosts }) {
   let location = useLocation();
   let search = location.search;
   let query = qs.parse(search).searchField;
-  console.log({ q: query });
-  //keep filtered posts
-  //return filtered posts if at least 1 available
-  //return text saying something like "no articles found" otherwise
+
+  function dateCompare(a, b) {
+    return a.fields.publishingDate < b.fields.publishingDate
+      ? 1
+      : b.fields.publishingDate < a.fields.publishingDate
+      ? -1
+      : 0;
+  }
   const filteredBlogPosts = blogPosts
     .filter((post) => {
       if (query) {
@@ -37,23 +41,29 @@ export default function BlogPosts({ blogPosts }) {
         return post;
       }
     })
+    .sort(dateCompare)
     .map((post) => {
-      console.log("returning post:\n");
-      console.log(post);
-      return <IndividualPost post={post} detailed={entry_id ? true : false} />;
+      return (
+        <IndividualPost
+          key={post.sys.id}
+          post={post}
+          detailed={entry_id ? true : false}
+        />
+      );
     });
+  //.sort((a,b) => (a.fields.publishingDate > b.fields.publishingDate) ? 1 : ((b.fields.publishingDate > a.fields.publishingDate) ? -1 : 0));
+
+  //.sort((a,b) => (a.fields.publishingDate > b.fields.publishingDate) ? 1 : ((b.fields.publishingDate > a.fields.publishingDate) ? -1 : 0))
 
   if (filteredBlogPosts) {
     if (filteredBlogPosts.length >= 1) {
-      //at least one result => render
-      console.log(filteredBlogPosts.length + " articles found.");
       return filteredBlogPosts;
     } else {
       //no results found, give feedback
       if (query) {
         //query search wanted but no results found
         return (
-          <div className="query-noresults-feedback">
+          <div className="query-noresults-feedback h-100">
             <Card bg="warning">
               <Card.Header>
                 Oops! Couldn't find any blog articles for your search query.
@@ -63,7 +73,7 @@ export default function BlogPosts({ blogPosts }) {
         );
       } else {
         return (
-          <div className="generic-noresults-feedback vh-100">
+          <div className="generic-noresults-feedback h-100">
             <Card bg="danger">
               <Card.Header>
                 Oops! Couldn't find any blog articles. Our codemonkeys are hard
@@ -76,7 +86,7 @@ export default function BlogPosts({ blogPosts }) {
     }
   } else {
     return (
-      <div className="generic-noresults-feedback">
+      <div className="generic-noresults-feedback h-100">
         <Card bg="danger">
           <Card.Header>
             Oops! Couldn't find any blog articles. Our codemonkeys are hard at

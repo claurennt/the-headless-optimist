@@ -90,16 +90,17 @@ button.btn:hover, button.btn:focus{
   margin: 10px 16.666%;
 }
 
-.blogpost-body {
-
+.custom-border {
+border: 1px solid #6B76FF;
 }
-
-.blogpost-info {
+.author-profile-pic {
+  margin: 0 auto;
 }
 
 .App-footer {
   background-color: #6B76FF;
   color: #F9F871;
+  
 }
 
 .w-50 {

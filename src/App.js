@@ -5,6 +5,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import BlogPosts from "./BlogPosts";
 import Header from "./Header";
 import Footer from "./Footer";
+import Authors from "./Authors";
 
 const client = contentful.createClient({
   space: `${process.env.REACT_APP_CONTENTFUL_SPACEID}`,
@@ -16,16 +17,11 @@ function App() {
   const [blogPosts, setBlogPosts] = useState();
 
   useEffect(() => {
-    async function getContentTypesAsync() {
-      const response = await client.getContentTypes();
-      console.log({ content_models: response.items });
-      //return response;
-    }
     async function getEntriesAsync() {
       const response = await client.getEntries();
       setBlogPosts(response.items);
     }
-    getContentTypesAsync();
+
     getEntriesAsync();
   }, []);
 
@@ -49,6 +45,9 @@ function App() {
                 </Route>
                 <Route path="/author/:author">
                   <BlogPosts blogPosts={blogPosts} />
+                </Route>
+                <Route path="/Authors">
+                  <Authors />
                 </Route>
               </Switch>
               <Route path="/home">

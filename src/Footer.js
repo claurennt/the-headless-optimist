@@ -7,13 +7,13 @@ export default function Footer() {
         <div className="container container-fluid titleWrapper  ">
           <div className=" row justify-content-md-center">
             <div className=" col-auto text-end h-25 ">
-              <spam>About Us</spam> |<spam>Contact Us</spam> |
-              <spam>Privacy Policy</spam>
+              <span>About Us</span> | <span>Contact Us</span> |
+              <span> Privacy Policy</span>
             </div>
           </div>
           <div className=" row justify-content-md-center">
             <div className="col-auto ">
-              <p>Created by: Claudia, Danny and Jugesh</p>
+              <p className="col-sm-20">Created by: Claudia, Danny and Jugesh</p>
             </div>
           </div>
         </div>
