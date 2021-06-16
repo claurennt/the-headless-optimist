@@ -6,6 +6,8 @@ import BlogPosts from "./BlogPosts";
 import Header from "./Header";
 import Footer from "./Footer";
 import Authors from "./Authors";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import Loader from "react-loader-spinner";
 
 const client = contentful.createClient({
   space: `${process.env.REACT_APP_CONTENTFUL_SPACEID}`,
@@ -15,17 +17,29 @@ const client = contentful.createClient({
 
 function App() {
   const [blogPosts, setBlogPosts] = useState();
-
+  const [isLoading, setIsLoading] = useState();
   useEffect(() => {
+    setIsLoading(true);
     async function getEntriesAsync() {
       const response = await client.getEntries();
+      setIsLoading(false);
       setBlogPosts(response.items);
     }
 
     getEntriesAsync();
   }, []);
 
-  if (blogPosts) {
+  if (isLoading) {
+    return (
+      <Loader
+        visible={isLoading}
+        type="ThreeDots"
+        color="#00BFFF"
+        height={80}
+        width={80}
+      />
+    );
+  } else if (blogPosts) {
     return (
       <>
         <div className="App">
